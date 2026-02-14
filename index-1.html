@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для моєї Валентинки ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 500px;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ff4d6d;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 150px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #successMessage {
+            display: none;
+        }
+
+        .heart-bg {
+            position: absolute;
+            color: rgba(255,255,255,0.5);
+            animation: float 6s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajN5YnFwY3B4cWwwcW14ZmQ3bnZ5OGw0Znh6ZWF4ZGZ4Y3B4YzF4eiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/iCVzZwwE6QhFPHR5nc/giphy.gif">
+
+        <h1 id="mainText">Чи будеш ти моєю коханою Валентинкою на все життя?</h1>
+
+        <div class="buttons">
+            <button id="yesBtn">Так ❤️</button>
+            <button id="noBtn">Ні 💔</button>
+        </div>
+
+        <div id="successMessage">
+            <h2>Ура! Я так тебе кохаю! ❤️</h2>
+            <p>Ти зробила мене найщасливішим!</p>
+            <br>
+            <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" style="width: 100%;">
+        </div>
+    </div>
+
+    <script>
+        const yes = document.getElementById('yesBtn');
+        const no = document.getElementById('noBtn');
+        const main = document.getElementById('mainText');
+        const btns = document.querySelector('.buttons');
+        const msg = document.getElementById('successMessage');
+
+        no.addEventListener('click', () => {
+            no.classList.add('hidden');
+            main.innerText = "А тепер тільки один варіант... 😏";
+        });
+
+        yes.addEventListener('click', () => {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            btns.style.display = 'none';
+            main.style.display = 'none';
+            msg.style.display = 'block';
+        });
+
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.className = 'heart-bg';
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = Math.random() * 20 + 20 + 'px';
+
+            document.body.appendChild(h);
+
+            setTimeout(() => h.remove(), 6000);
+        }, 300);
+    </script>
+</body>
+</html>
